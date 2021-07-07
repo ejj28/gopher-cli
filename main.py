@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import socket
+from termcolor import colored
 
 DEFAULT_PORT = 70
 
@@ -49,17 +50,20 @@ def retrieve(host, port):
     return table
 
 def display(inTable):
+    print("\n")
     for r in inTable:
-        if len(r) > 1:
-            usertext = r[0]
-            print(usertext[1:len(usertext)])
+        text = r[0]
+        if text[0] == "0" or text[0] == "1":
+            print(colored(text[1:len(text)], "cyan"))
+        else:
+            print(text[1:len(text)])
 try:
     while True:
         try:
             userInput()
         except ValueError as error:
-            print(error)
+            print(colored(error, "red"))
         except Exception as error:
-            print(error)
+            print(colored(error, "red"))
 except KeyboardInterrupt:
     print("\nExiting..")
